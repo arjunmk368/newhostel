@@ -30,9 +30,9 @@ def index(request):
 def get_data(request):
     settings = ApplicationSettings.objects.get(pk=1)
     if settings.senior_or_first_year:
-        years = [2,3,4,5]
+        years = [2, 3, 4, 5]
     else:
-        years =[1]
+        years = [1]
     models = Applications.objects.all().filter(Department=request.user.Department_portal,
                                                Course_of_study=request.POST['course'], Year_of_Study__in=years)
 
@@ -59,26 +59,33 @@ def save_data(request):
     else:
         models.category_isvalid = 0
     models.verified_department = 1
-    print(pin)
-    source = "682022"
-    if (pin == "682022"):
-        models.distance = 0
-    else:
-        dest = str(pin)
-        link = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + source + "&destinations=" + dest + "&key=AIzaSyCE69Rb-G9LtjgZ1EEx2qyN19xpNj67_JI"
-        r = requests.get(link)
-        y = r.json()
-        dist = y["rows"][0]["elements"][0]["distance"]["text"]
-        dist = dist[0:len(dist) - 3]
-        dist = float(dist)
-        print(dist)
-        models.distance = dist
-    if(request.POST['yearofstudy']!=''):
+    # print(pin)
+    # source = "682022"
+    # if (pin == "682022"):
+    #     models.distance = 0
+    # else:
+    #     dest = str(pin)
+    #     link = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + source + "&destinations=" + dest + "&key=AIzaSyCE69Rb-G9LtjgZ1EEx2qyN19xpNj67_JI"
+    #     print(link)
+    #     r = requests.get(link)
+    #     y = r.json()
+    #     dist = y["rows"][0]["elements"][0]["distance"]["text"]
+    #     dist = dist[0:len(dist) - 3]
+    #     dist = float(dist)
+    #     print(dist)
+    #     models.distance = dist
+    if (request.POST['yearofstudy'] != ''):
         models.Year_of_Study = request.POST['yearofstudy']
-    if(request.POST['gender']!=''):
+    if (request.POST['gender'] != ''):
         models.Gender = request.POST['gender']
+    if (request.POST['prime'] != ''):
+        models.Prime_Ministers_program = request.POST['prime']
+    if (request.POST['handicapped'] != ''):
+        models.Physically_Handicapped = request.POST['handicapped']
+    if (request.POST['nativity'] != ''):
+        models.Keralite = request.POST['nativity']
     models.save()
-    return HttpResponse("hello")
+    return HttpResponse('Hii')
 
 
 @login_required(redirect_field_name='/auth/')
@@ -111,10 +118,14 @@ def priority(request):
                 models_valid_femalenonkeralite.append(i)
 
     sortedmodels_malekeralite = sorted(models_valid_malekeralite, key=lambda x: x.create_priority_value(), reverse=True)
-    sortedmodels_malenonkeralite = sorted(models_valid_malenonkeralite, key=lambda x: x.create_priority_value(), reverse=True)
-    sortedmodels_femalekeralite = sorted(models_valid_femalekeralite, key=lambda x: x.create_priority_value(), reverse=True)
-    sortedmodels_femalenonkeralite = sorted(models_valid_femalenonkeralite, key=lambda x: x.create_priority_value(), reverse=True)
+    sortedmodels_malenonkeralite = sorted(models_valid_malenonkeralite, key=lambda x: x.create_priority_value(),
+                                          reverse=True)
+    sortedmodels_femalekeralite = sorted(models_valid_femalekeralite, key=lambda x: x.create_priority_value(),
+                                         reverse=True)
+    sortedmodels_femalenonkeralite = sorted(models_valid_femalenonkeralite, key=lambda x: x.create_priority_value(),
+                                            reverse=True)
     return render(request, 'Department/priority.html',
-                  {'m_keralite': sortedmodels_malekeralite, 'f_keralite': sortedmodels_femalekeralite, 'm_nonkeralite': sortedmodels_malenonkeralite,
+                  {'m_keralite': sortedmodels_malekeralite, 'f_keralite': sortedmodels_femalekeralite,
+                   'm_nonkeralite': sortedmodels_malenonkeralite,
                    'f_nonkeralite': sortedmodels_femalenonkeralite, 'Department': department,
                    'Course': course})

@@ -60,14 +60,18 @@ function load_data() {
 
             $(".allotment_submit").on("click", function () {
                 // var select = $($(this).parent().parent()).children(".rs-select2").children(".hostel").val();
+                var course = document.getElementById('course').value;
                 var reg = $($(this).parent().parent()).children(".reg_no").text();
                 var pin = $($(this).parent().parent()).children(".pincode").children(".pin").val();
                 var gender = $($(this).parent().parent()).children(".gender").children(".gender_desc").val();
                 var yearofstudy = $($(this).parent().parent()).children(".yearofstudy").children(".yearofstudy_desc").val();
                 var yearback = $($(this).parent().parent()).children(".year_back").children(".cont1").children(".year").is(":checked");
                 var category = $($(this).parent().parent()).children(".category").children(".cont2").children(".category-inner").is(":checked");
-                // var room = $($(this).parent().parent()).children(".room_no").children(".room").val();
+                var prime = $($(this).parent().parent()).children(".prime").children(".prime_desc").val();
+                var handicapped = $($(this).parent().parent()).children(".handicapped").children(".physically_desc").val();
+                var keralaite = $($(this).parent().parent()).children(".keralaite").children(".keralaite_desc").val();
                 console.log(gender);
+                console.log(keralaite);
                 $.ajax("/department/savedata/", {
                     method: "post",
                     data: {
@@ -78,7 +82,10 @@ function load_data() {
                         category: category,
                         csrfmiddlewaretoken: csrf,
                         yearofstudy: yearofstudy,
-                    }
+                        handicapped: handicapped,
+                        prime: prime,
+                        nativity: keralaite,
+                    },
                 });
 
             });
@@ -150,6 +157,7 @@ function load_data() {
 // }
 
 function changeColor(btn) {
+
     btn.style.backgroundColor = "#b5b3b2";
 
 }
