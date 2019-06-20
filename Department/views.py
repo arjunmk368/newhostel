@@ -50,6 +50,7 @@ def save_data(request):
     category = request.POST['category']
     models = Applications.objects.get(Registration_No=reg)
     models.Pincode = pin
+    models.distance = request.POST['distance']
     if yearback == "true":
         models.year_back = 1
     else:
@@ -84,6 +85,7 @@ def save_data(request):
         models.Physically_Handicapped = request.POST['handicapped']
     if (request.POST['nativity'] != ''):
         models.Keralite = request.POST['nativity']
+
     models.save()
     return HttpResponse('Hii')
 

@@ -1059,3 +1059,8 @@ tr {
 .custom-navbar{
     /*position: fixed;*/
 }
+
+.link_distance{
+    border: solid blue 1px;
+    padding: 10px;
+}

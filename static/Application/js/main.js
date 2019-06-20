@@ -1107,7 +1107,7 @@ function load_course() {
         "Department of Ship Technology": ["B.Tech", "M.Tech"],
         "Department of Statistics": ["M.Sc", "M.Tech", "Ph.D"],
         "Inter University Centre for IPR Studies (IUCIPRS)": ["LLM", "Ph.D"],
-        "International School of Photonics": ["Integrated M.Sc", "Ph.D"],
+        "International School of Photonics": ["Integrated M.Sc", "Ph.D","M.Tech"],
         "National Centre for Aquatic Animal Health (NCAAH)": ["M.Tech", "Ph.D"],
         "School of Engineering": ["Civil Engg.(B.Tech)",
             "Computer Science & Engg.(B.Tech)",
