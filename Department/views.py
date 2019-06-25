@@ -95,11 +95,17 @@ def save_data(request):
 def priority(request):
     course = request.POST['course']
     user = (request.user)
-    department = request.user.Department_portal;
+    department = request.user.Department_portal
+    settings = ApplicationSettings.objects.get(pk=1)
+    if settings.senior_or_first_year:
+        years = [2, 3, 4, 5]
+    else:
+        years = [1]
+
     models_keralite = Applications.objects.all().filter(Department=department, Course_of_study=course,
-                                                        verified_department='1', year_back='0', Keralite='1')
+                                                        verified_department='1', year_back='0', Keralite='1').filter(Year_of_Study__in=years)
     models_nonkeralite = Applications.objects.all().filter(Department=department, Course_of_study=course,
-                                                           verified_department='1', year_back='0', Keralite='0')
+                                                           verified_department='1', year_back='0', Keralite='0').filter(Year_of_Study__in=years)
     models_valid_malekeralite = []
     models_valid_malenonkeralite = []
     models_valid_femalekeralite = []
