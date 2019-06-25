@@ -495,7 +495,7 @@ class Applications(models.Model):
 
     def create_priority_value(self):
         priority_value = self.distance
-        if self.Keralite == '1':
+        if self.Keralite == 1:
             if self.Category == 'SC' or self.Category == 'ST':
                 if (self.category_isvalid == 1):
                     priority_value += 100000000
@@ -515,7 +515,7 @@ class Applications(models.Model):
 
     def distance_valid(self):
         if (
-                self.Category == 'SC' or self.Category == 'ST' or self.Category == 'OEC' or self.Physically_Handicapped == '1'):
+                self.Category == 'SC' or self.Category == 'ST' or self.Category == 'OEC' or self.Physically_Handicapped == 1):
             return True
         else:
             if (self.distance < 25):

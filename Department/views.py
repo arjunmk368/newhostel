@@ -45,7 +45,7 @@ def get_data(request):
 def save_data(request):
     print("views function")
     pin = request.POST['pin']
-    std_id = request.POST['std_id']
+    std_id = int(request.POST['std_id'])
     reg = request.POST['reg']
     yearback = request.POST['yearback']
     category = request.POST['category']
