@@ -1,7 +1,9 @@
 {% for model in models %}
     {% if model.Pincode %}
         <tr>
+
             <td>{{ forloop.counter }}</td>
+            <td class="std_id" hidden>{{ model.id }}</td>
             <td style="" class="reg_no">{{ model.Registration_No }}</td>
             <td style="">{{ model.Name }}</td>
             <td class="rs-select2 js-select-simple select--no-search gender">

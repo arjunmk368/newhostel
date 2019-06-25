@@ -70,12 +70,14 @@ function load_data() {
                 var prime = $($(this).parent().parent()).children(".prime").children(".prime_desc").val();
                 var handicapped = $($(this).parent().parent()).children(".handicapped").children(".physically_desc").val();
                 var keralaite = $($(this).parent().parent()).children(".keralaite").children(".keralaite_desc").val();
+                var std_id = $($(this).parent().parent()).children(".std_id").text();
                 console.log(distance);
                 console.log(gender);
                 console.log(keralaite);
                 $.ajax("/department/savedata/", {
                     method: "post",
                     data: {
+                        std_id:std_id,
                         reg: reg,
                         pin: pin,
                         gender: gender,
