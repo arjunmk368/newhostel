@@ -495,16 +495,17 @@ class Applications(models.Model):
 
     def create_priority_value(self):
         priority_value = self.distance
-        if self.Category == 'SC' or self.Category == 'ST':
-            if (self.category_isvalid == 1):
-                priority_value += 100000000
-            else:
-                priority_value += 0
-        if self.Category == 'OEC':
-            if (self.category_isvalid == 1):
-                priority_value += 5000000
-            else:
-                priority_value +=0
+        if self.Keralite == '1':
+            if self.Category == 'SC' or self.Category == 'ST':
+                if (self.category_isvalid == 1):
+                    priority_value += 100000000
+                else:
+                    priority_value += 0
+            if self.Category == 'OEC':
+                if (self.category_isvalid == 1):
+                    priority_value += 5000000
+                else:
+                    priority_value += 0
         if self.Prime_Ministers_program or self.State == "Lakshadweep (UT)":
             priority_value += 10000000
         if self.Physically_Handicapped:
@@ -513,7 +514,8 @@ class Applications(models.Model):
         return priority_value
 
     def distance_valid(self):
-        if (self.Category == 'SC' or self.Category == 'ST' or self.Category == 'OEC' or self.Physically_Handicapped == '1'):
+        if (
+                self.Category == 'SC' or self.Category == 'ST' or self.Category == 'OEC' or self.Physically_Handicapped == '1'):
             return True
         else:
             if (self.distance < 25):
