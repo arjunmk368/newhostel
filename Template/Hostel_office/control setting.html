@@ -69,17 +69,6 @@
                     {% endif %}
 
                 </form>
-
-             <form method="post" action="{% url 'Hostel_office:application_control' %}" class="col">
-                    {% csrf_token %}
-                    <input hidden name="senior" value="{{ setting.senior_or_first_year }}">
-                    <input type="submit" class={% if setting.senior_or_first_year %}
-                        "btn btn-primary" value="open verification for first year" >
-                    {% else %}
-                        "btn btn-secondary" value="open verification for seniors">
-                    {% endif %}
-
-                </form>
             </div>
         </div>
     </div>

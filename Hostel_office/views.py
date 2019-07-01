@@ -200,8 +200,6 @@ def control(request):
             settings.active_applications = not settings.active_applications
             settings.save()
 
-        if "senior" in request.POST:
-            settings.senior_or_first_year = not settings.senior_or_first_year
-            settings.save()
+
 
     return render(request,"Hostel_office/control setting.html",{"setting":settings})

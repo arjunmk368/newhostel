@@ -29,7 +29,8 @@ def index(request):
 @user_passes_test(test, redirect_field_name='/')
 def get_data(request):
     settings = ApplicationSettings.objects.get(pk=1)
-    if settings.senior_or_first_year:
+    print(request.POST['verification_seniors'])
+    if request.POST['verification_seniors'] == '1':
         years = [2, 3, 4, 5]
     else:
         years = [1]
@@ -95,10 +96,9 @@ def save_data(request):
 @user_passes_test(test, redirect_field_name='/')
 def priority(request):
     course = request.POST['course']
-    user = (request.user)
     department = request.user.Department_portal
-    settings = ApplicationSettings.objects.get(pk=1)
-    if settings.senior_or_first_year:
+    print(request.POST['verification_seniors'])
+    if request.POST['verification_seniors'] == '1':
         years = [2, 3, 4, 5]
     else:
         years = [1]

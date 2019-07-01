@@ -38,17 +38,17 @@ function create_send_data(object) {
 
 
 function load_data() {
-    // var dept = document.getElementById("dept").value;
     var course = document.getElementById("course").value;
-    // var gender = document.getElementById("gender").value;
+    var verification = document.getElementById("verification").value;
     var csrf = document.getElementsByName("csrfmiddlewaretoken")[0].value;
     console.log("load data function");
     console.log(course);
+    console.log(verification);
     $.ajax("/department/getdata/", {
         method: "post",
         data: {
             course: course,
-            // gender: gender,
+            verification_seniors: verification,
             csrfmiddlewaretoken: csrf,
         },
 
@@ -77,7 +77,7 @@ function load_data() {
                 $.ajax("/department/savedata/", {
                     method: "post",
                     data: {
-                        std_id:std_id,
+                        std_id: std_id,
                         reg: reg,
                         pin: pin,
                         gender: gender,
@@ -88,7 +88,7 @@ function load_data() {
                         handicapped: handicapped,
                         prime: prime,
                         nativity: keralaite,
-                        distance:distance,
+                        distance: distance,
                     },
                 });
 
@@ -106,11 +106,13 @@ function changeColor(btn) {
 function priority() {
     console.log('a');
     var course = document.getElementById('course').value;
+    var verification = document.getElementById("verification").value;
     var csrf = document.getElementsByName("csrfmiddlewaretoken")[0].value;
     $.ajax('priority/', {
         method: 'post',
         data: {
             course: course,
+            verification_seniors: verification,
             csrfmiddlewaretoken: csrf
         },
         success: function (data) {
